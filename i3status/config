@@ -1,0 +1,62 @@
+general {
+	colors = False
+	color_good = "#BBBBBB"
+	color_bad = "#CC1616"
+	color_degraded = "#55858E"
+	interval = 2
+}
+
+order += "tztime local"
+order += "cpu_usage"
+order += "ethernet bond0"
+order += "volume master"
+order += "disk /"
+order += "disk /home"
+order += "disk /media/bulkdisk"
+order += "disk /media/nas"
+
+
+cpu_usage {
+    format = "%usage"
+}
+
+ethernet bond0 {
+        # if you use %speed, i3status requires root privileges
+        format_up = "Eth: %ip (%speed)"
+        format_down = "Eth: no"
+}
+
+volume master {
+    format = " %volume"
+    format_muted = "  %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+tztime local {
+    format = "%A, %B %-d, %Y - %-I:%M %p %Z"
+}
+
+disk "/" {
+        #format = "%free (or: %percentage_used used, %percentage_used_of_avail used of avail, %percentage_free free, %percentage_avail avail)"
+        format = "%free" 
+}
+
+disk "/home" {
+       	#format = "%free (or: %percentage_used used, %percentage_used_of_avail used of avail, %percentage_free free, %percentage_avail avail)"
+       	format = "%free"
+}
+
+disk "/media/bulkdisk" {
+       	#format = "%free (or: %percentage_used used, %percentage_used_of_avail used of avail, %percentage_free free, %percentage_avail avail)"
+       	format = "%free"
+}
+
+disk "/media/nas" {
+        #format = "%free (or: %percentage_used used, %percentage_used_of_avail used of avail, %percentage_free free, %percentage_avail avail)"
+        format = "%free"
+}
+
+
+

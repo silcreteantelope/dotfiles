@@ -1,0 +1,218 @@
+# Pyromancy i3 config file (v1)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# 
+# Table of Contents
+	# Keybinds
+		# Mods
+		# Movement
+		# Programs
+			# Orientation
+				# Horizontal
+					bindsym $mod+h split h
+				# Vertical
+					bindsym $mod+v split v
+				# Fullscreen
+					bindsym $mod+v split v
+			# Container Layout
+				# change container layout (stacked, tabbed, toggle split)
+					bindsym $mod+s layout stacking
+					bindsym $mod+w layout tabbed
+					bindsym $mod+e layout toggle split
+			# Focus
+				# Move Focused Window
+					# Vim Keys
+						bindsym $mod+Shift+j move left
+						bindsym $mod+Shift+k move down
+						bindsym $mod+Shift+l move up
+						bindsym $mod+Shift+semicolon move right
+					# Arrow Keys
+						bindsym $mod+Shift+Left move left
+						bindsym $mod+Shift+Down move down
+						bindsym $mod+Shift+Up move up
+						bindsym $mod+Shift+Right move right
+				# Change Focus
+					# Vim Keys
+						bindsym $mod+j focus left
+						bindsym $mod+k focus down
+						bindsym $mod+l focus up
+						bindsym $mod+semicolon focus right
+					# Arrow Keys
+						bindsym $mod+Left focus left
+						bindsym $mod+Down focus down
+						bindsym $mod+Up focus up
+						bindsym $mod+Right focus right
+				# Focus Doesn't Follow Mouse
+					focus_follows_mouse no		
+		# Program Controls
+	# Cosmetic
+		# Colors
+		# Gaps
+		# Fonts
+	# Programs
+		# Start Commands
+			# StartupCommands
+				exec_always xrandr --output DP-3 --off --output DVI-I-0 --off --output HDMI-0 --off --output DP-5 --off --output DP-4 --mode 1920x1080 --pos 960x0 --rotate normal --output DVI-I-1 --off --output DP-2 --off -- output DP-1 --off --output DP-0 --mode 3840x2160 --pos 0x1080 --rotate normal
+				exec_always vmware-modconfig --console --install-all
+				exec --no-startup-id "pulseaudio -vvv" #pulseaudio
+				exec_always --no-startup-id feh --bg-fill ~/Pictures/background.png #sets background
+				exec --no-startup-id Backups #starts backup
+				exec --no-startup-id redshift-gtk #redshift
+				exec --no-startup-id blueberry #bluetooth
+				exec --no-startup-id kalu #arch news
+				exec --no-startup-id synergy #synergy
+				exec --no-startup-id nm-applet #network
+				exec --no-startup-id numlockx on #numlock
+				exec_always --no-startup-id xautolock -time 10 -locker "i3lock -i ~/Pictures/backgroundlock.png -t"
+				exec --no-startup-id Volumeicon
+				exec --no-startup-id dropbox
+				exec_always --no-startup-id ~/.config/polybar/launch.sh
+			#
+		# i3 shit
+		#
+	#  
+#	Keybindings	#
+	# Modifiers
+		# Set Mod Key
+			set $mod Mod4  
+		# Use Mouse+$mod to drag floating windows to their wanted position
+			floating_modifer $mod
+	# Movement
+		# Kill Window
+			bindsym $mod+Shift+q kill
+	# Programs
+		# Dmenu (program launcher)
+			bindsym $mod+d exec --no-startup-id i3-dmenu-desktop 
+		# Terminator (terminal)
+			bindsym $mod+Return exec terminator #terminal emulator
+	# Program Controls
+		# Spotify
+		bindsym XF86AudioNext exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+		bindsym XF86AudioPrev exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+		bindsym XF86AudioStop exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+		bindsym XF86AudioPlay exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+#	Cosmetic	#
+	# Colors
+		# class                 border  backgr. text    indicator child_border
+		client.focused          #267158 #267158 #000000 #B70094   #267158
+		client.focused_inactive #063565 #063565 #000000 #B70094   #063565
+		client.unfocused        #0D58A6 #0D58A6 #000000 #B70094   #0D58A6
+		client.urgent           #ff0090 #900000 #000000 #B70094   #ff0090
+		client.placeholder      #000000 #0c0c0c #00A56F #B70094   #0c0c0c
+
+	# Gaps
+		# Sets gaps for Windows in workspaces not Steam
+			gaps inner 10
+			gaps outer 10
+		# (next update) Sets gaps for specific programs
+			#for_window [class="^.*"] border pixel 4
+	# Fonts
+		# Font for window titles. Will also be used by the bar unless a different font
+		# is used in the bar {} block below.
+			font pango:DejaVu Sans Mono 10
+#	Programs	#
+	# Start Commands
+	# i3 shit
+
+
+# control programs tiling
+for_window [class="Steam"] floating disable, border none
+
+# i3lock
+bindsym Pause exec i3lock -i ~/Pictures/backgroundlock.png
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Workspaces
+bindsym $mod+1 workspace Primary
+bindsym $mod+2 workspace Peripheral
+bindsym $mod+3 workspace Secondary
+bindsym $mod+4 workspace Steam
+workspace Steam gaps inner 0
+workspace Steam gaps outer 0
+bindsym $mod+5 workspace Game
+bindsym $mod+6 workspace Porn
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace Primary
+bindsym $mod+Shift+2 move container to workspace Peripheral
+bindsym $mod+Shift+3 move container to workspace Secondary
+bindsym $mod+Shift+4 move container to workspace Steam
+bindsym $mod+Shift+5 move container to workspace Game
+bindsym $mod+Shift+6 move container to workspace Porn
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#locker
+set $Locker i3lock && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Scroll_Lock mode "$mode_system"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	position bottom
+	output DP-4
+	status_command i3status
+}
+

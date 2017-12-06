@@ -1,0 +1,388 @@
+###########
+# Credits #
+###########
+#https://www.reddit.com/r/unixporn/comments/5oi78b/i3gaps_fifty_shades_of_red_and_gray/
+
+###########
+# General #
+###########
+
+set $mod Mod4
+
+font pango:Terminus 9
+
+
+
+#############
+# Variables #
+#############
+
+set_from_resource $darkblack   background  #000000
+set_from_resource $black       background  #000000
+set_from_resource $darkred     color0  #000000
+set_from_resource $red         color8  #000000
+set_from_resource $darkgreen   color1  #000000
+set_from_resource $green       color9  #000000
+set_from_resource $darkyellow  color2  #000000
+set_from_resource $yellow      color10 #000000
+set_from_resource $darkblue    color3  #000000
+set_from_resource $blue        color11 #000000
+set_from_resource $darkmagenta color4  #000000
+set_from_resource $magenta     color12 #000000
+set_from_resource $darkcyan    color5  #000000
+set_from_resource $cyan        color13 #000000
+set_from_resource $darkwhite   color7  #000000
+set_from_resource $white       color15 #000000
+
+
+
+##########
+# Colors #
+##########
+
+#                       BORDER     	BACKGROUND 	TEXT   		INDICATOR
+client.focused          $red   		$darkwhite   	$darkblack 	$black
+client.unfocused        $darkblack 	$black 		$white 		$darkwhite
+client.focused_inactive $darkblack 	$black     	$white 		$darkwhite
+client.urgent           $red       	$red       	$white 		$red
+
+
+
+################
+# Key Bindings #
+################
+
+# Start Programs #
+bindsym $mod+Return exec --no-startup-id terminator
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Kill focused window #
+bindsym $mod+Shift+q kill
+
+# Use Mouse+$mod to drag floating windows to their wanted position #
+floating_modifier $mod
+
+
+# i3lock #
+bindsym Pause exec i3lock -i ~/Pictures/background.png
+
+# Screenshot with scrot
+bindsym Print exec scrot -e 'mv $f ~/pyromancy/Screenshots'
+
+# Restart i3 inplace #
+bindsym $mod+Shift+r restart
+
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Alternatively, you can use the cursor keys  #
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window #
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+
+# Split in vertical orientation #
+bindsym $mod+v split v
+
+# Split in horizontal orientation #
+bindsym $mod+Shift+v split h
+
+# Enter fullscreen mode for the focused container #
+bindsym $mod+f fullscreen toggle
+
+# Change container layout #
+bindsym $mod+s layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating #
+bindsym $mod+space floating toggle
+
+# Change focus between tiling / floating windows #
+bindsym $mod+Shift+space focus mode_toggle
+
+
+# Focus the parent container #
+bindsym $mod+a focus parent
+
+# Focus the child container #
+# bindsym $mod+d focus child
+
+
+# Program Controls #
+#spotify controls
+bindsym XF86AudioNext exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym XF86AudioPrev exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioStop exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPlay exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+
+##############
+# Workspaces #
+##############
+
+# Allow workspaces back and forth #
+workspace_auto_back_and_forth yes
+
+set $ws1  "1: Primary"
+set $ws2  "2: Peripheral"
+set $ws3  "3: Secondary"
+set $ws4  "4: Steam"
+set $ws5  "5: Porn"
+set $ws6  "6: Tertiary"
+set $ws7  "7: Ethan Sux"
+set $ws8  "8: Sean is Hitler"
+set $ws9  "9"
+set $ws10 "10"
+
+# Switch to workspace #
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace back_and_forth
+
+# Move focused container to workspace #
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+# Assign clients to workspaces #
+assign [class="(?i)chrome"] $ws1
+assign [class="^Steam$"] $ws4
+assign [class="^X-terminal-emulator$"] $ws1
+assign [class="^Terminator$"] $ws1
+assign [class="^Thunar$"] $ws1
+assign [class="^Google-play-music-desktop-player$"] $ws5
+
+# Enable or disable floating #
+for_window [class="Arandr"] floating enable
+for_window [class="recordMyDesktop"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Artha"] floating enable
+for_window [instance="dukto"] floating enable
+for_window [class="Pcmanfm"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Zenmap"] floating enable
+for_window [class="Angry IP Scanner"] floating enable
+for_window [class="DB Browser for SQLite"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [class="^Google-Chrome$" window_role="^pop-up$"] floating enable
+ 
+#for_window [class="^.*"] floating enable
+
+
+
+#########
+# Modes #
+#########
+
+# Resize window (you can also use the mouse for that) #
+set $mode_resize    Resize
+bindsym $mod+g mode "$mode_resize"
+
+
+mode "$mode_resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+# same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces. #
+set $mode_gaps Gaps: (o) outer, (i) inner
+
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# System Menu #
+set $sysmenu "[p]oweroff  re[b]oot  [r]eload [s]uspend  [l]ogout  "
+bindsym $mod+Delete      mode $sysmenu
+
+mode $sysmenu {
+    bindsym r         restart
+    bindsym l         exit
+    bindsym p         exec shutdown -P now
+    bindsym b         exec shutdown -r now
+    bindsym s         exec systemct suspend
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
+}
+
+
+#######
+# Bar #
+#######
+
+# Start i3bar to display a workspace bar (plus the system information i3status #
+# finds out, if available) #
+# bar {
+# 	colors {
+# 		# Whole color settings
+# 		background 	#0000000000
+# 		statusline 	$white
+# 		separator  	$darkblack
+# 
+# 		# Type             border  	background 	font
+# 		focused_workspace  $darkred  	$darkred 	$white
+# 		active_workspace   $darkred  	$red  		$white
+# 		inactive_workspace $black 	$black 	$darkwhite
+# 		urgent_workspace   $red 	$white 	$darkblack
+# 	}
+# 	height 23
+# 	position bottom
+# 	tray_padding 3
+# 
+# 	i3bar_command i3bar
+# 	status_command i3blocks -c ~/.i3/i3blocks.conf
+# 	strip_workspace_numbers yes
+# }
+
+
+
+#############
+# Autostart #
+#############
+
+exec_always xrandr --output DP-3 --off --output DVI-I-0 --off --output HDMI-0 --off --output DP-5 --off --output DP-4 --mode 1920x1080 --pos 960x0 --rotate normal --output DVI-I-1 --off --output DP-2 --off --output DP-1 --off --output DP-0 --mode 3840x2160 --pos 0x1080 --rotate normal
+exec --no-startup-id "pulseaudio -vvv" #pulseaudio
+exec --no-startup-id feh --bg-fill ~/Pictures/background.png #sets background
+
+exec --no-startup-id Backups #starts backup
+exec --no-startup-id redshift-gtk #redshift
+exec --no-startup-id bluedevil #bluetooth
+
+exec --no-startup-id nm-applet #network
+exec --no-startup-id numlockx on #numlock
+exec --no-startup-id xautolock -time 1 -locker "i3lock -i ~/Pictures/background.png -t"
+
+exec --no-startup-id Volumeicon
+exec --no-startup-id dropbox
+exec steam
+
+exec --no-startup-id terminator
+exec --no-startup-id pactl set-sink-volume 0 35%
+exec --no-startup-id feh --bg-scale /home/kenty/Wallpapers/wallpaper.jpg
+
+exec --no-startup-id nm-applet &
+exec --no-startup-id blueman-applet &
+exec --no-startup-id redshift-gtk &
+
+
+
+###################
+# Multimedia Keys #
+###################
+
+# Pulse Audio controls #
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+###########
+# i3-Gaps #
+###########
+
+# Borders #
+for_window [class="^.*"] border pixel 2
+
+# Set inner/outer gaps #
+gaps inner 15
+gaps outer 10
+
+# Smart gaps (gaps used if only more than one container on the workspace) #
+# smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) # 
+smart_borders on
+
+workspace $ws1 gaps inner 0
+workspace $ws1 gaps outer 0
+
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
+
+
+
+bindsym $mod+z gaps inner current minus 5
+bindsym $mod+u gaps inner current plus 5
+bindsym $mod+Shift+z gaps outer current minus 5
+bindsym $mod+Shift+u gaps outer current plus 5
+
+bindsym $mod+Shift+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+Right resize grow width 10 px or 10 ppt
