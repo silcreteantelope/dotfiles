@@ -1,4 +1,4 @@
-Pyromancy i3 config file (v1)
+Pyromancy i3 laptop config file (v1)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # Table of Contents
@@ -253,4 +253,3 @@ bar {
 #	output DP-4
 	status_command i3status
 }
-
