@@ -1,0 +1,260 @@
+# Pyromancy i3 config file
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# 
+##	Cosmetic
+	# Colors
+		
+		# class                 border  backgr. text    indicator child_border
+		client.focused          #00DEBD #00DEBD #000000 #00DEBD   #00DEBD
+		client.focused_inactive #005F51 #005F51 #000000 #005F51   #005F51
+		client.unfocused        #1170AB #1170AB #000000 #1170AB   #1170AB
+		client.urgent           #AB1111 #AB1111 #000000 #AB1111   #AB1111
+		client.placeholder      #000000 #0c0c0c #000000 #B70094   #0c0c0c
+	# Gaps
+
+		# Borders
+			for_window [class="^.*"] border pixel 4	
+		# Set gaps for Windows
+			gaps inner 10
+			gaps outer 10		
+	# Set gaps for Workspaces
+			workspace 4 gaps inner 0
+			workspace 4 gaps outer 0	
+##	Font
+	font pango:monospace 10 	
+	#font pango:DejaVu Sans Mono 10
+##	Keybinds
+	# Modifiers
+		# Set Mod Key
+			set $mod Mod4
+		# Use Mouse+$mod to drag floating windows to their wanted position
+			#floating_modifer $mod
+	# i3 controls
+		# reload the configuration file
+			bindsym $mod+Shift+c reload
+		# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+			bindsym $mod+Shift+r restart
+		# exit i3 (logs you out of your X session)
+			bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+		# Shutdown logout
+			#locker
+			set $Locker i3lock && sleep 1
+			set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+			mode "$mode_system" {
+			    bindsym l exec --no-startup-id $Locker, mode "default"
+			    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+			    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+			    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+			    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+			    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+			
+			    # back to normal: Enter or Escape
+			    bindsym Return mode "default"
+			    bindsym Escape mode "default"
+			}
+			bindsym $mod+Scroll_Lock mode "$mode_system"
+	# Movement
+		# Kill Window
+			bindsym $mod+Shift+q kill
+		# toggle tiling / floating
+			bindsym $mod+Shift+space floating toggle
+		# change focus between tiling / floating windows
+			bindsym $mod+space focus mode_toggle
+		# focus the parent container
+			bindsym $mod+a focus parent
+		# focus the child container
+			#bindsym $mod+d focus child
+		# Orientation
+			# Horizontal
+				bindsym $mod+h split h
+			# Vertical
+				bindsym $mod+v split v
+			# Fullscreen
+				bindsym $mod+f fullscreen toggle
+		# Container Layout
+			# change container layout (stacked, tabbed, toggle split)
+				bindsym $mod+s layout stacking
+				bindsym $mod+w layout tabbed
+				bindsym $mod+e layout toggle split
+		# Focus
+			# Move Focused Window
+				# Vim Keys
+					bindsym $mod+Shift+j move left
+					bindsym $mod+Shift+k move down
+					bindsym $mod+Shift+l move up
+					bindsym $mod+Shift+semicolon move right
+				# Arrow Keys
+					bindsym $mod+Shift+Left move left
+					bindsym $mod+Shift+Down move down
+					bindsym $mod+Shift+Up move up
+					bindsym $mod+Shift+Right move right
+			# Change Focus
+				# Vim Keys
+					bindsym $mod+j focus left
+					bindsym $mod+k focus down
+					bindsym $mod+l focus up
+					bindsym $mod+semicolon focus right
+				# Arrow Keys
+					bindsym $mod+Left focus left
+					bindsym $mod+Down focus down
+					bindsym $mod+Up focus up
+					bindsym $mod+Right focus right
+			# Focus Doesn't Follow Mouse
+				focus_follows_mouse no		
+		# Resize
+			mode "resize" {
+			        # These bindings trigger as soon as you enter the resize mode
+			
+			        # Pressing left will shrink the window’s width.
+			        # Pressing right will grow the window’s width.
+			        # Pressing up will shrink the window’s height.
+			        # Pressing down will grow the window’s height.
+			        bindsym j resize shrink width 10 px or 10 ppt
+			        bindsym k resize grow height 10 px or 10 ppt
+			        bindsym l resize shrink height 10 px or 10 ppt
+			        bindsym semicolon resize grow width 10 px or 10 ppt
+			
+			        # same bindings, but for the arrow keys
+			        bindsym Left resize shrink width 10 px or 10 ppt
+			        bindsym Down resize grow height 10 px or 10 ppt
+			        bindsym Up resize shrink height 10 px or 10 ppt
+			        bindsym Right resize grow width 10 px or 10 ppt
+			
+			        # back to normal: Enter or Escape
+			        bindsym Return mode "default"
+			        bindsym Escape mode "default"
+			}
+			bindsym $mod+r mode "resize"
+		# Gaps
+			set $mode_gaps Gaps: (o) outer, (i) inner
+			set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+			set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+			bindsym $mod+Shift+g mode "$mode_gaps"
+			mode "$mode_gaps" {
+			        bindsym o      mode "$mode_gaps_outer"
+			        bindsym i      mode "$mode_gaps_inner"
+			        bindsym Return mode "default"
+			        bindsym Escape mode "default"
+			}
+			mode "$mode_gaps_inner" {
+			        bindsym plus  gaps inner current plus 5
+			        bindsym minus gaps inner current minus 5
+			        bindsym 0     gaps inner current set 0
+			
+			        bindsym Shift+plus  gaps inner all plus 5
+			        bindsym Shift+minus gaps inner all minus 5
+			        bindsym Shift+0     gaps inner all set 0
+			
+			        bindsym Return mode "default"
+			        bindsym Escape mode "default"
+			}
+			mode "$mode_gaps_outer" {
+			        bindsym plus  gaps outer current plus 5
+			        bindsym minus gaps outer current minus 5
+			        bindsym 0     gaps outer current set 0
+			
+			        bindsym Shift+plus  gaps outer all plus 5
+			        bindsym Shift+minus gaps outer all minus 5
+			        bindsym Shift+0     gaps outer all set 0
+			
+			        bindsym Return mode "default"
+			        bindsym Escape mode "default"
+			}
+	# Programs
+		# Dmenu (program launcher)
+			bindsym $mod+d exec --no-startup-id i3-dmenu-desktop 
+		# Terminator (terminal)
+			bindsym $mod+Return exec terminator #terminal emulator
+		# i3lock
+			bindsym Pause exec i3lock -i ~/Pictures/backgroundlock.png
+	# Program Controls
+		# Spotify
+		bindsym XF86AudioNext exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+		bindsym XF86AudioPrev exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+		bindsym XF86AudioStop exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+		bindsym XF86AudioPlay exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+		bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+		bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+		bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+	# Workspaces
+		# Bind workspace to monitor
+			workspace 1 output DP-0
+			Workspace 2 output DP-4
+			workspace 3 output DP-4
+			workspace 4 output DP-0
+			workspace 5 output DP-0
+		# Go to Workspace
+			bindsym $mod+1 workspace 1
+			bindsym $mod+2 workspace 2
+			bindsym $mod+3 workspace 3
+			bindsym $mod+4 workspace 4
+			bindsym $mod+5 workspace 5
+			bindsym $mod+6 workspace 6
+			bindsym $mod+7 workspace 7
+			bindsym $mod+8 workspace 8
+			bindsym $mod+9 workspace 9
+			bindsym $mod+0 workspace 10
+		# Move focused container to workspace
+			bindsym $mod+Shift+1 move container to workspace 1
+			bindsym $mod+Shift+2 move container to workspace 2
+			bindsym $mod+Shift+3 move container to workspace 3
+			bindsym $mod+Shift+4 move container to workspace 4
+			bindsym $mod+Shift+5 move container to workspace 5
+			bindsym $mod+Shift+6 move container to workspace 6
+			bindsym $mod+Shift+7 move container to workspace 7
+			bindsym $mod+Shift+8 move container to workspace 8
+			bindsym $mod+Shift+9 move container to workspace 9
+			bindsym $mod+Shift+0 move container to workspace 10
+	# Xrandr
+		#Switch Monitor Modes
+			bindsym $mod+Shift+Ctrl+p exec xrandr --output DP-3 --off --output DVI-I-0 --off --output HDMI-0 --off --output DP-5 --off --output DP-4 --mode 2560x1440 --rate 144.00 --pos 0x304 --rotate normal --output DVI-I-1 --off --output DP-2 --off --output DP-1 --off --output DP-0 --primary --mode 3840x2160 --pos 2560x0 --rotate normal
+##	Programs
+	# Assign programs to Workspaces
+		assign [class="firefox"] 1	
+		assign [class="pavucontrol"] 2
+		assign [class="discord"] 2
+		assign [class="spotify"] 2
+		assign [class="steam-runtime"] 4
+	# Program tiling modes
+		for_window [class="Steam"] floating disable, border none
+	# Start Commands
+		# Startup stuff
+			# Xrandr monitor set
+				exec_always xrandr --output DP-3 --off --output DVI-I-0 --off --output HDMI-0 --off --output DP-5 --off --output DP-4 --mode 2560x1440 --rate 144.00 --pos 0x0 --rotate left --output DVI-I-1 --off --output DP-2 --off --output DP-1 --off --output DP-0 --primary --mode 3840x2160 --pos 1440x200 --rotate normal
+			# Walpaper
+				exec_always --no-startup-id feh --bg-fill ~/Pictures/background.png
+			# Redshift
+				exec --no-startup-id redshift
+				exec --no-startup-id redshift-gtk
+			# Network
+				exec --no-startup-id nm-applet
+			# Autolock
+				exec_always --no-startup-id xautolock -time 10 -locker "i3lock -i ~/Pictures/backgroundlock.png -t"
+			# Dropbox
+				exec --no-startup-id dropbox
+			# Bar
+				# i3bar and i3status
+					# Start i3bar to display a workspace bar, Uncomment to use i3status
+							#bar {
+								#position bottom
+								#output DP-4
+								#status_command i3status
+							#}
+				# Polybar
+					exec_always --no-startup-id ~/.config/polybar/launch.sh
+			# Vmware Fix
+				#exec_always vmware-modconfig --console --install-all
+		# Programs
+			# Bluetooth Settings
+				#exec --no-startup-id blueberry	
+			# Firefox
+				exec --no-startup-id firefox
+			# Pavucontrol
+				exec --no-startup-id pavucontrol
+			# Discord
+				exec --no-startup-id discord
+			# Spotify
+				exec --no-startup-id spotify
+			# Steam
+				exec --no-startup-id steam-runtime
