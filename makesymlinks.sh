@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".themes .icons libvirt leafpad xfce4 terminator inkscape Thuna i3status gtk-3.0 polybar i3 bashrc vimrc"    # list of files/folders to symlink in homedir
+files=".themes .icons"    # list of files/folders to symlink in homedir
 
 ##########
 
