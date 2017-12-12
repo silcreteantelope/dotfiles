@@ -211,11 +211,11 @@
 			bindsym $mod+Shift+Ctrl+p exec xrandr --output DP-3 --off --output DVI-I-0 --off --output HDMI-0 --off --output DP-5 --off --output DP-4 --mode 2560x1440 --rate 144.00 --pos 0x304 --rotate normal --output DVI-I-1 --off --output DP-2 --off --output DP-1 --off --output DP-0 --primary --mode 3840x2160 --pos 2560x0 --rotate normal
 ##	Programs
 	# Assign programs to Workspaces
-		assign [class="firefox"] 1	
-		assign [class="pavucontrol"] 2
-		assign [class="discord"] 2
-		assign [class="spotify"] 2
-		assign [class="steam-runtime"] 4
+		assign [class="firefox"] workspace 1	
+		assign [class="pavucontrol"] workspace 2
+		assign [class="discord"] workspace 2
+		assign [class="spotify"] workspace 2
+		assign [class="steam-runtime"] workspace 4
 	# Program tiling modes
 		for_window [class="Steam"] floating disable, border none
 	# Start Commands
