@@ -14,12 +14,12 @@ background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
-1 = #DE00DE
-2 = #005F1B
-3 = #09B89E
-4 = #B53F7A
-5 = #6825B8
-6 = #0AC20A
+1 = #2EFF6A
+2 = #CC1B1B
+3 = #CC1B1B
+4 = #CC1B1B
+5 = #1B88CC
+6 = #2AE896
 alert = #6825B8
 
 [bar/main]
